@@ -14,7 +14,30 @@
           <img src="{{ asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link ">
+                {{ Auth::user()->name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <i class="right fa fa-angle-left"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
         </div>
       </div>
 
@@ -23,8 +46,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          <!-- <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -33,7 +56,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="./index.html" class="nav-link ">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Dashboard v1</p>
                 </a>
@@ -153,7 +176,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-table"></i>
@@ -164,20 +187,26 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{ route('barang.index') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>Data Barang</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="{{ route('user.index') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Data Tables</p>
+                  <p>Data Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('peminjaman.index') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Data Peminjaman</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-header">EXAMPLES</li>
+          <!-- <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon fa fa-calendar"></i>
@@ -215,7 +244,12 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
+          <li class="nav-item">
+                <a href="pages/examples/profile.html" class="nav-link">
+                  <i class="nav-icon fa fa-home"></i>
+                  <p>Profile</p>
+                </a>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
@@ -231,11 +265,6 @@
                   <p>Invoice</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/examples/profile.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Profile</p>
-                </a>
               </li>
               <li class="nav-item">
                 <a href="pages/examples/login.html" class="nav-link">
@@ -257,7 +286,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-plus-square-o"></i>
               <p>
@@ -298,7 +327,7 @@
               <i class="nav-icon fa fa-file"></i>
               <p>Documentation</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">

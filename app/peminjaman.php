@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class peminjaman extends Model
 {
+	protected $table = 'peminjamans';
     protected $fillable = ['id_user','id_barang','pengembalian'];
     protected $cast = ['pengembalian' => 'boolean',];
 

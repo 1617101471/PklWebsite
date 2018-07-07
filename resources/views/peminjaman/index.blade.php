@@ -4,8 +4,8 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div class="card card-primary">
-			  <div class="panel-heading">Barang
-			  	<div class="panel-title pull-right"><a href="{{ route('barang.create') }}">Tambah Data</a>
+			  <div class="panel-heading">Peminjaman
+			  	<div class="panel-title pull-right"><a href="{{ route('peminjaman.create') }}">Tambah Data</a>
 			  	</div>
 			  </div>
 			  <div class="panel-body">
@@ -14,26 +14,30 @@
 				  	<thead>
 			  		<tr>
 			  		  <th>No</th>
+					  <th>Nama peminjam</th>
 					  <th>Nama Barang</th>
-					  <th>Stok</th>
+					  <th>Tanggal Pinjam</th>
+					  <th>Tanggal Kembali</th>
 					  <th colspan="3">Action</th>
 			  		</tr>
 				  	</thead>
 				  	<tbody>
 				  		@php $no = 1; @endphp
-				  		@foreach($barangs as $data)
+				  		@foreach($peminjamans as $data)
 				  	  <tr>
 				    	<td>{{ $no++ }}</td>
-				    	<td>{{ $data->nama }}</td>
-				    	<td>{{ $data->stok }}</td>
+				    	<td>{{ $data->user->name }}</td>
+				    	<td>{{ $data->barang->nama }}</td>
+				    	<td>{{ $data->tgl_pinjam}}</td>
+				    	<td>{{ $data->tgl_pengembalian}}</td>
 						<td>
-							<a class="btn btn-warning" href="{{ route('barang.edit',$data->id) }}">Edit</a>
+							<a class="btn btn-warning" href="{{ route('peminjaman.edit',$data->id) }}">Edit</a>
 						</td>
 						<!-- <td>
-							<a href="{{ route('barang.show',$data->id) }}" class="btn btn-success">Show</a>
+							<a href="{{ route('peminjaman.show',$data->id) }}" class="btn btn-success">Show</a>
 						</td> -->
 						<td>
-							<form method="post" action="{{ route('barang.destroy',$data->id) }}">
+							<form method="post" action="{{ route('peminjaman.destroy',$data->id) }}">
 								@csrf
 								<input type="hidden" name="_method" value="DELETE">
 

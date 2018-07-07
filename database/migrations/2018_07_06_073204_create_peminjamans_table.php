@@ -19,7 +19,8 @@ class CreatePeminjamansTable extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
             $table->unsignedinteger('id_barang');
             $table->foreign('id_barang')->references('id')->on('barangs')->onDelete('CASCADE');
-            $table->boolean('pengembalian')->default(false);
+            $table->date('tgl_pinjam');
+            $table->date('tgl_pengembalian');
             $table->timestamps();
         });
     }
