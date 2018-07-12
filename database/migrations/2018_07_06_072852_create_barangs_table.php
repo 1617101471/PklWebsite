@@ -17,6 +17,7 @@ class CreateBarangsTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->integer('stok');
+            $table->string('gambar');
             $table->timestamps();
         });
     }

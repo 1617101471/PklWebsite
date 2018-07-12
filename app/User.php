@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     /**
@@ -28,6 +30,6 @@ class User extends Authenticatable
     ];
 
     public function peminjamans(){
-        return $this->hasMany('App\pemijaman');
+        return $this->hasOne('App\pemijaman','id_user');
     }
 }

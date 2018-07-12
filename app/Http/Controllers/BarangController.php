@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\barang;
+use File;
+
 class BarangController extends Controller
 {
     /**
@@ -37,12 +39,22 @@ class BarangController extends Controller
     {
         $this->validate($request, [
             'nama'=>'required|max:255',
-            'stok'=>'required|max:255'
+            'stok'=>'required|max:255',
+            'gambar' => 'required|'
         ]);
 
         $barangs = new barang;
         $barangs->nama = $request->nama;
         $barangs->stok = $request->stok;
+        $barangs->gambar = $request->gambar;
+        // upload gambar 
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $destinationPatch = public_path().'/assets/img/gambar/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSucces = $file->move($destinationPatch, $filename);
+            $barangs->gambar = $filename;
+        }
         $barangs->save();
         return redirect()->route('barang.index');
     }
@@ -81,12 +93,22 @@ class BarangController extends Controller
     {
         $this->validate($request, [
             'nama'=>'required|max:255',
-            'stok'=>'required|max:255'
+            'stok'=>'required|max:255',
+            'gambar' => 'required|'
         ]);
 
         $barangs = barang::findOrFail($id);
         $barangs->nama = $request->nama;
         $barangs->stok = $request->stok;
+        $barangs->gambar = $request->gambar;
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $destinationPatch = public_path().'/assets/img/gambar/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSucces = $file->move($destinationPatch, $filename);
+            $barangs->gambar = $filename;
+        }
         $barangs->save();
         return redirect()->route('barang.index');
     }
@@ -100,6 +122,15 @@ class BarangController extends Controller
     public function destroy($id)
     {
         $barangs = barang::findOrFail($id);
+            if ($barangs->gambar) {
+                $old_foto = $barangs->gambar;
+                $filepath = public_path(). DIRECTORY_SEPARATOR . 'assets/img/gambar/' . DIRECTORY_SEPARATOR . $barangs->gambar;
+                try{
+                    File::delete($filepath);
+                } catch (FileNotFoundException $e){
+                    // file sudah dihapus
+                }
+            }
         $barangs->delete();
         return redirect()->route('barang.index');
     }

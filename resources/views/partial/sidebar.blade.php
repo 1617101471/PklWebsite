@@ -1,9 +1,9 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="{{route('home')}}" class="brand-link bg-primary">
+      <img src="{{ asset('log9.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">SiPemBaLab</span>
     </a>
 
     <!-- Sidebar -->
@@ -11,15 +11,18 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          @role('admin')
+          <img src="{{ asset('admin.png')}}" class="img-circle elevation-2" alt="User Image">
+          @else('member')
+          <img src="{{ asset('user.png')}}" class="img-circle elevation-2" alt="User Image">
+          @endrole
         </div>
-        <div class="info">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link ">
-                {{ Auth::user()->name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                {{ Auth::user()->name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <i class="right fa fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
@@ -39,8 +42,6 @@
           </li>
         </ul>
         </div>
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -193,17 +194,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Data Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('peminjaman.index') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Data Peminjaman</p>
                 </a>
               </li>
+              @role('admin')
+              <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Data Member</p>
+                </a>
+              </li>
+              @endrole
             </ul>
           </li>
           <!-- <li class="nav-header">EXAMPLES</li>
@@ -250,7 +253,7 @@
                   <i class="nav-icon fa fa-home"></i>
                   <p>Profile</p>
                 </a>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>
@@ -285,7 +288,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-plus-square-o"></i>

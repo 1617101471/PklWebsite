@@ -57,13 +57,13 @@
             </div>
           </div>
           <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary">
+          <!-- /.col -->
+        </div>
+        <div class="social-auth-links text-center mb-3">
+            <button type="submit" class="btn btn-block btn-outline-primary">
                 {{ __('Login') }}
             </button>
           </div>
-          <!-- /.col -->
-        </div>
       </form>
 
       <!-- <div class="social-auth-links text-center mb-3">

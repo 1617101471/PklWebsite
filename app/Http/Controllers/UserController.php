@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Hash;
-
+use App\Role;
 class UserController extends Controller
 {
     /**
@@ -13,6 +13,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     // use RegistersUsers;
     public function index()
     {
         $users = User::paginate(10);
@@ -26,6 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        // $memberRole = Role::where('name','member')->first();
+        // dd($memberRole);
         return view('user.create');
     }
 
@@ -43,11 +47,13 @@ class UserController extends Controller
             'password' => 'required|max:255'
         ]);
 
+        $memberRole = Role::where('name','member')->first();
         $users = new User;
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = bcrypt($request->password);
         $users->save();
+        $users->attachRole($memberRole);
         return redirect()->route('user.index');
     }
 

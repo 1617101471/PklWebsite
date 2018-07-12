@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class peminjaman extends Model
 {
 	protected $table = 'peminjamans';
-    protected $fillable = ['id_user','id_barang','pengembalian'];
-    protected $cast = ['pengembalian' => 'boolean',];
-
+    protected $fillable = ['id_user','id_barang','tgl_pengembalian','jumlah'];
+    public $timestamps = true;
+    
     public function barang(){
-    	return $this->belongsTo('App\barang');
+    	return $this->belongsTo('App\barang','id_barang');
     }
     public function user(){
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo('App\User','id_user');
     }
 }

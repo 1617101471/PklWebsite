@@ -12,12 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/barang', 'BarangController');
-Route::resource('/user', 'UserController');
-Route::resource('/peminjaman', 'PeminjamanController');
+Route::group(['prefix'=>'admin', 'middleware'=>['auth','role:admin']],
+function (){
+	Route::resource('/barang', 'BarangController');
+	Route::resource('/user', 'UserController');
+	Route::resource('/peminjaman', 'PeminjamanController');
+});
+Route::group(['prefix'=>'member', 'middleware'=>['auth','role:member|admin']],
+function(){
+	Route::resource('/barang', 'BarangController');
+	Route::resource('/peminjaman', 'PeminjamanController');
+});
+
+
+

@@ -3,12 +3,12 @@
 <div class="row">
 	<div class="container">
 		<div class="col-md-12">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Tambah Data Member 
-			  	<div class="panel-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
+			<div class="card card-primary">
+			  <div class="card-header">Tambah Data Member 
+			  	<div class="card-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
 			  	</div>
 			  </div>
-			  <div class="panel-body">
+			  <div class="card-body">
 			  	<form action="{{ route('user.store') }}" method="post" >
 			  		@csrf
 			  		<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
@@ -47,7 +47,7 @@
           				<input class="form-control" type="password" name="password_confirmation" required>
         			</div>
 			  		<div class="form-group">
-			  			<button type="submit" class="btn btn-primary">Tambah</button>
+			  			<button type="submit" class="btn btn-outline-primary">Tambah</button>
 			  		</div>
 			  	</form>
 			  </div>

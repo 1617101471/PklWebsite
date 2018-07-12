@@ -2,14 +2,14 @@
 @section('content')
 <div class="row">
 	<div class="container">
-		<div class="col-md-12">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Edit Data Barang
-			  	<div class="panel-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
+		<div class="col-md-12"><br>
+			<div class="card card-primary">
+			  <div class="card-header">Edit Data Barang
+			  	<div class="card-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
 			  	</div>
 			  </div>
-			  <div class="panel-body">
-			  	<form action="{{ route('barang.update',$barangs->id) }}" method="post" >
+			  <div class="card-body">
+			  	<form action="{{ route('barang.update',$barangs->id) }}" method="post" enctype="multipart/form-data">
 			  		<input name="_method" type="hidden" value="PATCH">
         			@csrf
 
@@ -21,7 +21,18 @@
                                 <strong>{{ $errors->first('nama') }}</strong>
                             </span>
                         @endif
-			  		</div>
+                    </div>
+
+                    <div class="form-group">
+                    	<label class="cc-payment" class="control-label mb-1">Gambar</label>
+			  			@if (isset ($barangs) && $barangs->gambar)
+			  			<p>
+			  				<br>
+			  				<img src="{{ asset('assets/img/gambar/' .$barangs->gambar)}}" style="max-height: 125px; max-width: 125px; margin-top: 7px;" alt="">
+			  			</p>
+			  			@endif
+			  			<input type="file" name="gambar" value="{{ $barangs->gambar }}">
+                    </div>
 
 			  		<div class="form-group {{ $errors->has('stok') ? ' has-error' : '' }}">
 			  			<label class="control-label">Stok</label>	
@@ -33,7 +44,7 @@
                         @endif
 			  		</div>
 			  		<div class="form-group">
-			  			<button type="submit" class="btn btn-primary">Edit</button>
+			  			<button type="submit" class="btn btn-outline-primary">Edit</button>
 			  		</div>
 			  	</form>
 			  </div>

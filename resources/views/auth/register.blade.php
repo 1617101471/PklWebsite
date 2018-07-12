@@ -105,8 +105,8 @@
           </div>
       </div> -->
           <!-- /.col -->
-          <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
+          <div class="social-auth-links text-center mb-3">
+                <button type="submit" class="btn btn-block btn-outline-primary">
                     {{ __('Register') }}
                 </button>
            </div>
