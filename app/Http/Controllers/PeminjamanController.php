@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\barang;
 use App\peminjaman;
+use App\pengembalian;
 
 class PeminjamanController extends Controller
 {
@@ -16,8 +17,7 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $peminjamans = peminjaman::all();
-        // dd($peminjamans);
+        $peminjamans = peminjaman::with('User','barang')->get();
         return view('peminjaman.index', compact('peminjamans'));
     }
 
@@ -45,14 +45,13 @@ class PeminjamanController extends Controller
             'id_user' => 'required|max:255',
             'id_barang' => 'required|max:255',
             'jumlah'=>'required|max:255',
-            'tgl_pengembalian' => 'required|max:255'
         ]);
 
         $peminjamans = new peminjaman;
         $peminjamans->id_user = $request->id_user;
         $peminjamans->id_barang = $request->id_barang;
         $peminjamans->jumlah = $request->jumlah;
-        $peminjamans->tgl_pengembalian = $request->tgl_pengembalian;
+
         $barangs = barang::findOrFail($peminjamans->id_barang);
         $barangs->stok = $barangs->stok - $request->jumlah;
         $barangs-> save();
@@ -68,7 +67,12 @@ class PeminjamanController extends Controller
      */
     public function show($id)
     {
-        //
+        $peminjamans = peminjaman::findOrFail($id);
+        $users = User::all();
+        $barangs = barang::all();
+        $selectedusers = peminjaman::findOrFail($id)->id_user;
+        $selectedbarangs = peminjaman::findOrFail($id)->id_barang;
+        return view('peminjaman.show' ,compact('peminjamans','users','barangs','selectedusers','selectedbarangs'));
     }
 
     /**
@@ -96,20 +100,23 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'id_user' => 'required|max:255',
-            'id_barang' => 'required|max:255',
-            // 'tgl_pinjam' => 'required|max:255',
-            'tgl_pengembalian' => 'required|max:255'
-        ]);
+
+        $pengembalians = new pengembalian;
+        $pengembalians->id_user = $request->id_user;
+        $pengembalians->id_barang = $request->id_barang;
+        $pengembalians->jumlah = $request->jumlah;
+        $pengembalians->tgl_pinjam = $request->tgl_pinjam;
+        $pengembalians->save();
 
         $peminjamans = peminjaman::findOrFail($id);
-        $peminjamans->id_user = $request->id_user;
-        $peminjamans->id_barang = $request->id_barang;
-        // $peminjamans->tgl_pinjam = $request->tgl_pinjam;
-        $peminjamans->tgl_pengembalian = $request->tgl_pengembalian;
-        $peminjamans->save();
-        return redirect()->route('peminjaman.index');
+        $barangs = barang::findOrFail($request->id_barang);
+        $barangs->stok = $barangs->stok + $request->jumlah;
+
+        $barangs->save();
+        $peminjamans->delete();
+        $pengembalians->save();
+
+        return redirect()->route('pengembalian.index');
     }
 
     /**
@@ -121,8 +128,6 @@ class PeminjamanController extends Controller
     public function destroy($id)
     {
         $peminjamans = peminjaman::findOrFail($id);
-        $barangs = barang::findOrFail($peminjamans->id_barang);
-        $barangs->stok = $peminjamans->jumlah + $barangs->stok;
         $peminjamans->delete();
         return redirect()->route('peminjaman.index');
 

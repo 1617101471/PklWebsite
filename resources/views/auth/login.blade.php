@@ -82,9 +82,9 @@
             {{ __('Forgot Your Password?') }}
         </a>
       </p>
-      <p class="mb-0">
+      <!-- <p class="mb-0">
         <a href="register" class="btn btn-link">Register a new membership</a>
-      </p>
+      </p> -->
     </div>
     <!-- /.login-card-body -->
   </div>

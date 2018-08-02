@@ -23,6 +23,7 @@ function (){
 	Route::resource('/barang', 'BarangController');
 	Route::resource('/user', 'UserController');
 	Route::resource('/peminjaman', 'PeminjamanController');
+	Route::resource('/pengembalian', 'PengembalianController');
 });
 Route::group(['prefix'=>'member', 'middleware'=>['auth','role:member|admin']],
 function(){

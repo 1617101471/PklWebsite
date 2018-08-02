@@ -94,13 +94,12 @@ class BarangController extends Controller
         $this->validate($request, [
             'nama'=>'required|max:255',
             'stok'=>'required|max:255',
-            'gambar' => 'required|'
+            'gambar' => ''
         ]);
 
         $barangs = barang::findOrFail($id);
         $barangs->nama = $request->nama;
         $barangs->stok = $request->stok;
-        $barangs->gambar = $request->gambar;
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
@@ -108,7 +107,21 @@ class BarangController extends Controller
             $filename = str_random(6).'_'.$file->getClientOriginalName();
             $uploadSucces = $file->move($destinationPatch, $filename);
             $barangs->gambar = $filename;
+
+            // hapus gambar lama, jika ada
+        if ($barangs->gambar) { 
+        $old_gambar = $barangs->gambar;
+        $filepath = public_path() . DIRECTORY_SEPARATOR . '/assets/img/gambar'
+        . DIRECTORY_SEPARATOR . $barangs->gambar;
+            try {
+            File::delete($filepath);
+            } catch (FileNotFoundException $e) {
+        // File sudah dihapus/tidak ada
+            }
         }
+        $barangs->gambar = $filename;
+    }
+        $barangs->stok = $request->stok;
         $barangs->save();
         return redirect()->route('barang.index');
     }

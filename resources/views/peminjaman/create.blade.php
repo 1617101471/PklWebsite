@@ -53,16 +53,6 @@
 			  		</div> -->
 
 			  		
-
-			  		<div class="form-group {{ $errors->has('tgl_pengembalian') ? ' has-error' : '' }}">
-			  			<label class="control-label">Tanggal Pengembalian</label>	
-			  			<input type="date" name="tgl_pengembalian" class="form-control"  required>
-			  			@if ($errors->has('tgl_pengembalian'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('tgl_pengembalian') }}</strong>
-                            </span>
-                        @endif
-			  		</div>
 			  		<div class="form-group {{ $errors->has('jumlah') ? ' has-error' : '' }}">
 			  			<label class="control-label">Jumlah</label>	
 			  			<input type="number" name="jumlah" class="form-control"  required>

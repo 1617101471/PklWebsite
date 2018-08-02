@@ -199,6 +199,12 @@
                   <p>Data Peminjaman</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('pengembalian.index') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Data Pengembalian</p>
+                </a>
+              </li>
               @role('admin')
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
@@ -248,11 +254,11 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
                 <a href="pages/examples/profile.html" class="nav-link">
                   <i class="nav-icon fa fa-home"></i>
                   <p>Profile</p>
-                </a>
+                </a> -->
           <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-book"></i>

@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class peminjaman extends Model
+class pengembalian extends Model
 {
-	protected $table = 'peminjamans';
-    protected $fillable = ['id_user','id_barang','jumlah'];
+    protected $table = 'pengembalians' ;
+    protected $fillable = ['id_user','id_barang','jumlah','tgl_pinjam'];
     public $timestamps = true;
-    
+
     public function barang(){
     	return $this->belongsTo('App\barang','id_barang');
     }

@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
 	<div class="container">
-		<div class="col-md-12">
+		<div class="col-md-12"><br>
 			<div class="card card-primary">
 			  <div class="card-header">Tambah Data Member 
 			  	<div class="card-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>

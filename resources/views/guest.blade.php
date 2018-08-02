@@ -43,7 +43,7 @@
 							<li role="presentation"><a href="{{url('/home')}}">home</a></li>
 							@else
 							<li role="presentation"><a href="{{route('login')}}">Login</a></li>
-							<li role="presentation"><a href="{{route('register')}}">Register</a></li>
+							<!-- <li role="presentation"><a href="{{route('register')}}">Register</a></li> -->
 							@endauth					
 						</ul>
 					</div>

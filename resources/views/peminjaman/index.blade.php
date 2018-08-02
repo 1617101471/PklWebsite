@@ -5,7 +5,10 @@
 		<div class="col-md-12"><br>
 			<div class="card card-primary">
 			  <div class="card-header">Peminjaman
-			  	<div class="card-title pull-right"><a href="{{ route('peminjaman.create') }}">Tambah Data</a>
+			  	<div class="card-title pull-right">
+			  		@role('admin')
+			  		<a href="{{ route('peminjaman.create') }}">Tambah Data</a>
+			  		@endrole
 			  	</div>
 			  </div>
 			  <div class="card-body">
@@ -17,7 +20,6 @@
 					  <th>Nama peminjam</th>
 					  <th>Nama Barang</th>
 					  <th>Tanggal Pinjam</th>
-					  <th>Tanggal Kembali</th>
 					  <th>Jumlah Barang Yang Dipinjam</th>
 					  <th colspan="3">Action</th>
 			  		</tr>
@@ -30,24 +32,23 @@
 				    	<td>{{ $data->user->name }}</td>
 				    	<td>{{ $data->barang->nama }}</td>
 				    	<td>{{ $data->created_at}}</td>
-				    	<td>{{ $data->tgl_pengembalian}}</td>
-				    	<td><center>{{ $data->jumlah }}</td></center>
+				    	<td><center>{{ $data->jumlah }}</center></td>
 				    	
 				    	@role('admin')
-						<td>
-							<a class="btn btn-outline-warning" href="{{ route('peminjaman.edit',$data->id) }}">Edit</a>
-						</td>
 						<!-- <td>
-							<a href="{{ route('peminjaman.show',$data->id) }}" class="btn btn-outline-success">Show</a>
+							<a class="btn btn-outline-warning" href="{{ route('peminjaman.edit',$data->id) }}">Edit</a>
 						</td> -->
 						<td>
+							<a href="{{ route('peminjaman.show',$data->id) }}" class="btn btn-outline-success">Show</a>
+						</td>
+						<!-- <td>
 							<form method="post" action="{{ route('peminjaman.destroy',$data->id) }}">
 								@csrf
 								<input type="hidden" name="_method" value="DELETE">
 
 								<button type="submit" class="btn btn-outline-danger"  onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')">Delete</button>
 							</form>
-						</td>
+						</td> -->
 						@else('member')
 						<td>
 							<form method="post" action="{{ route('peminjaman.destroy',$data->id) }}">
